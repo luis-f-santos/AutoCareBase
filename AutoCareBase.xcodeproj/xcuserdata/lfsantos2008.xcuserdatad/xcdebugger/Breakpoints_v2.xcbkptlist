@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "582FB0B7-6928-4164-9652-8E9518BE0327"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1EDBFE1E-CD1C-4D2C-B2D5-1E762DD221F5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoCareBase/Core/Authentication/View Model/AuthViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "fetchUser()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1EDBFE1E-CD1C-4D2C-B2D5-1E762DD221F5 - d8f9d956991107a4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for AutoCareBase.AuthViewModel.fetchUser() async -&gt; ()"
+                  moduleName = "AutoCareBase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lfsantos2008/Documents/iOS/core-ios/AutoCareBase/AutoCareBase/Core/Authentication/View%20Model/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "829">
+               </Location>
+               <Location
+                  uuid = "1EDBFE1E-CD1C-4D2C-B2D5-1E762DD221F5 - d28e8d7c220d5fa5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for AutoCareBase.AuthViewModel.fetchUser() async -&gt; ()"
+                  moduleName = "AutoCareBase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lfsantos2008/Documents/iOS/core-ios/AutoCareBase/AutoCareBase/Core/Authentication/View%20Model/AuthViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "840">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BDC8B723-A699-4C80-B2BD-3B88DE48CC15"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoCareBase/Services/PostService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "fetchPublicPosts()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C323FAD6-C93F-4342-917A-CAD8A1E25815"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoCareBase/Model/myPost.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "init(postData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2C183AD0-D9D4-48C5-8AB1-343AEFDB98CB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoCareBase/Model/myPost.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "init(postData:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2C183AD0-D9D4-48C5-8AB1-343AEFDB98CB - c2d1422ef2df4710"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AutoCareBase.myPost.init(postData: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; AutoCareBase.myPost"
+                  moduleName = "AutoCareBase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lfsantos2008/Documents/iOS/core-ios/AutoCareBase/AutoCareBase/Model/myPost.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "4912">
+               </Location>
+               <Location
+                  uuid = "2C183AD0-D9D4-48C5-8AB1-343AEFDB98CB - c2d1422ef2df4710"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AutoCareBase.myPost.init(postData: Swift.Dictionary&lt;Swift.String, Any&gt;) -&gt; AutoCareBase.myPost"
+                  moduleName = "AutoCareBase"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lfsantos2008/Documents/iOS/core-ios/AutoCareBase/AutoCareBase/Model/myPost.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "5218">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F27AF87D-5718-46FD-9CF3-58E159CD1014"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AutoCareBase/Services/PostService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "fetchUserPosts(withUid:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
