@@ -3,7 +3,6 @@
 //  AutoCareBase
 //
 //  Created by Luis Santos on 6/10/24.
-//  Adding comment for github test
 
 import SwiftUI
 
