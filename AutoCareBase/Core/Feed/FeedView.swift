@@ -20,6 +20,9 @@ struct FeedView: View {
                     }
                 }
             }
+            .refreshable {
+                Task { try await viewModel.fetchAllPublicPost() }
+            }
             .navigationTitle("Feed")
             .navigationBarTitleDisplayMode(.inline)
         }
