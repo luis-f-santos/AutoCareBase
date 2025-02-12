@@ -13,7 +13,7 @@ struct AutoCareBaseApp: App {
 //    @StateObject var viewModel = AuthViewModel()
     
     init() {
-        FirebaseApp.configure()
+        FirebaseApp.configure() 
     }
     
     var body: some Scene {
