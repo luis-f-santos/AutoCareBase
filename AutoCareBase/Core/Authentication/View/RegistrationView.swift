@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct RegistrationView: View {
+    enum Field {
+        case email, fullName, phoneNumber,
+                address, confirmPassword, password
+    }
+    
     @State private var email = ""
     @State private var fullName = ""
     @State private var phoneNumber = ""
     @State private var address = ""
     @State private var password = ""
     @State private var confirmPassword = ""
-    
+    @FocusState private var focusField: Field?
+
     @Environment(\.dismiss) var dismiss
 //    @EnvironmentObject var viewModel: AuthViewModel
 
@@ -24,33 +30,75 @@ struct RegistrationView: View {
                 //Logo
                 Image("AustinWeirdAutosLogo")
                     .resizable()
-                    .scaledToFill()
-                    .frame(width: 300, height: 200)
-                    .padding(.vertical, 30)
+                    .scaledToFit()
+//                    .frame(width: 300, height: 200)
+                    .padding(.vertical, 20)
                 
                 VStack(spacing: 24){
                     InputView(text: $email,
                               title: "Email Address",
                               placeHolder: "name@example.com")
                     .textInputAutocapitalization(.never)
+                    .submitLabel(.next)
+                    .keyboardType(.emailAddress)
+                    .autocorrectionDisabled()
+                    .focused($focusField, equals: .email)
+                    .onSubmit {
+                        focusField = .fullName
+                    }
                     InputView(text: $fullName,
                               title: "Full Name",
                               placeHolder: "Enter your name")
+                    .submitLabel(.next)
+                    .keyboardType(.alphabet)
+                    .autocorrectionDisabled()
+                    .focused($focusField, equals: .fullName)
+                    .onSubmit {
+                        focusField = .phoneNumber
+                    }
                     InputView(text: $phoneNumber,
                               title: "Phone Number",
                               placeHolder: "512-XXX-XXXX")
+                    .submitLabel(.next)
+                    .keyboardType(.namePhonePad)
+                    .focused($focusField, equals: .phoneNumber)
+                    .onSubmit {
+                        focusField = .address
+                    }
                     InputView(text: $address,
                               title: "Address - Optional",
                               placeHolder: "123 Main St")
+                    .submitLabel(.next)
+                    .autocorrectionDisabled()
+                    .focused($focusField, equals: .address)
+                    .onSubmit {
+                        focusField = .password
+                    }
                     InputView(text: $password,
                               title: "Password",
                               placeHolder: "Enter your password",
                               isSecureField: true)
+                    .textInputAutocapitalization(.never)
+                    .submitLabel(.next)
+                    .keyboardType(.asciiCapable)
+                    .autocorrectionDisabled()
+                    .focused($focusField, equals: .password)
+                    .onSubmit {
+                        focusField = .confirmPassword
+                    }
                     ZStack(alignment: .trailing) {
                         InputView(text: $confirmPassword,
                                   title: "Confirm Password",
                                   placeHolder: "Confirm your password",
                                   isSecureField: true)
+                        .textInputAutocapitalization(.never)
+                        .submitLabel(.done)
+                        .keyboardType(.asciiCapable)
+                        .autocorrectionDisabled()
+                        .focused($focusField, equals: .confirmPassword)
+                        .onSubmit {
+                            focusField = nil
+                        }
                         if !password.isEmpty && !confirmPassword.isEmpty
                             && password == confirmPassword {
                             Image(systemName: "checkmark.circle.fill")
@@ -94,6 +142,8 @@ struct RegistrationView: View {
             .cornerRadius(10)
             .padding(.top, 16)
             
+            Spacer()
+            
             Button {
                 dismiss()
             } label: {
@@ -104,9 +154,9 @@ struct RegistrationView: View {
                 }
             }
             .padding(.top, 8)
+            .padding(.bottom, 5)
         }
     }
-    
 }
 
 extension RegistrationView: AuthenticationFormProtocol {

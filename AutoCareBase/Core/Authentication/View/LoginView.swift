@@ -7,34 +7,52 @@
 import SwiftUI
 
 struct LoginView: View {
+    enum Field {
+        case email, password
+    }
+    
     @State private var email = ""
     @State private var password = ""
-    
 //    @EnvironmentObject var viewModel: AuthViewModel;
+    @FocusState private var focusField: Field?
     
     var body: some View {
         
         NavigationStack{
-            
             VStack{
                 //Logo
                 Image("AustinWeirdAutosLogo")
                     .resizable()
-                    .scaledToFill()
-                    .frame(width: 300, height: 200)
-                    .padding(.vertical, 30)
+                    .scaledToFit()
+//                    .frame(width: 300, height: 200)
+                    .padding(.vertical, 20)
                 
-                // Email Address Form
+                // Sign In Form
                 VStack(spacing: 24){
                     InputView(text: $email,
                               title: "Email Address",
                               placeHolder: "name@example.com")
                     .textInputAutocapitalization(.never)
+                    .submitLabel(.next)
+                    .keyboardType(.emailAddress)
+                    .autocorrectionDisabled()
+                    .focused($focusField, equals: .email)
+                    .onSubmit {
+                        focusField = .password
+                    }
+                    
                     InputView(text: $password,
                               title: "Password",
                               placeHolder: "Enter your password",
                               isSecureField: true)
                     .textInputAutocapitalization(.never)
+                    .submitLabel(.done)
+                    .keyboardType(.asciiCapable)
+                    .autocorrectionDisabled()
+                    .focused($focusField, equals: .password)
+                    .onSubmit {
+                        focusField = nil
+                    }
                 }
                 .padding(.horizontal)
                 .padding(.top, 12)
@@ -68,9 +86,11 @@ struct LoginView: View {
                         Text("Sign up")
                             .fontWeight(.bold)
                     }
+                    .padding(.bottom, 5)
                 }
             }
         }
+        .padding()
     }
 }
 
