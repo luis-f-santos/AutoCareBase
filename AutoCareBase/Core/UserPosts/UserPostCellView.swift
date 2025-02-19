@@ -18,6 +18,7 @@ struct UserPostCellView: View {
     @State private var alertDestrucText = "Save"
     @State private var isPhotoPickerPresented = false
     @State private var showSaveAlert = false
+    @FocusState private var descriptionIsFocused: Bool
     @StateObject var viewModel: UserPostCellViewModel
         
     init(post: Post, selectedPostId: Binding<String?>, isUpdating: Binding<Bool>)/*, myFunctionWithParameters: @escaping (String, Int) -> Void*/  {
@@ -110,6 +111,7 @@ struct UserPostCellView: View {
                     Spacer()
                     
                     Button {
+                        descriptionIsFocused = false
                         if(viewModel.isThereChangesToSave(fromPost: post)){
                             showSaveAlert.toggle()
                         }else{
@@ -138,6 +140,7 @@ struct UserPostCellView: View {
                     .background(Color(.white))
                     .foregroundColor(viewModel.isEditingEnabled ? Color(.darkGray) : .black)
                     .font(.system(size: 14))
+                    .focused($descriptionIsFocused)
                     .disabled(!viewModel.isEditingEnabled)
 
                 
