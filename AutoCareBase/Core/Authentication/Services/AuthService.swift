@@ -22,14 +22,19 @@ class AuthService {
     }
     
     @MainActor
-    func logIn(withEmail email: String, password: String) async throws {
+    func logIn(withEmail email: String, password: String, completion: @escaping (Bool, String) -> Void) async throws {
         print("Sign In.. inside AuthviewModel")
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             try await loadUserData()
+            completion(false, "All Good")
         } catch {
-            print("DEBUG: Failed to SignIn with error \(error.localizedDescription)")
+            let err = error as NSError
+            let errorMessage = getFirebaseErrorMessage(error: err)
+            print("Error: \(errorMessage)")
+            print("DEBUG: Failed to SignIn with error: \(error.localizedDescription)")
+            completion(true, errorMessage)
         }
         
         
@@ -37,23 +42,24 @@ class AuthService {
     
     @MainActor
     func createUser(withEmail email: String, password: String, fullName: String,
-                    phoneNumber: String, address: String) async throws {
+                    phoneNumber: String, address: String, completion: @escaping (Bool, String) -> Void) async throws {
         print("Creating user.. inside AuthviewModel")
         
         do {
-            print(password)
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            //NEED TO: clean optional data to avoid nulls
+            //NEEDTO: clean optional data to avoid nulls
             let user = User(id: result.user.uid, fullName: fullName, email: email,
                             address: address, phoneNumber: phoneNumber, password: password)
             self.currentUser = user
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-            // Update this Enviornmental Object
-            //try await loadUserData()
+            completion(false, "All Good")
         } catch {
-            print("DEBUG: Failed to create user with error \(error.localizedDescription)")
+            let errorMessage = getFirebaseErrorMessage(error: error as NSError)
+            print("Error: \(errorMessage)")
+            print("DEBUG: Failed to create user with error: \(error.localizedDescription)")
+            completion(true, errorMessage)
         }
     }
     
@@ -63,6 +69,29 @@ class AuthService {
         guard let uid = self.userSession?.uid else { return }
         self.currentUser =  try await UserService.fetchUser(withUid: uid)
         print("DEBUG: CURRENT USER IS \(String(describing: self.currentUser))")
+    }
+    
+    func getFirebaseErrorMessage(error: NSError) -> String {
+        let code = AuthErrorCode.Code(rawValue: error.code)
+        if(code == .invalidEmail){
+            return "Invalid email"
+        }
+        else if(code == .wrongPassword){
+            return "Wrong password"
+        }
+        else if(code == .invalidCredential){
+            return "Wrong email or password"
+        }
+        else if(code == .networkError)
+        {
+            return "Network error"
+        }
+        else if(code == .tooManyRequests){
+            return "Too many unsuccessful login attempts. Please try again later"
+        }
+        else {
+            return "Unknown error occurred trying to login"
+        }
     }
     
     func signOut() {

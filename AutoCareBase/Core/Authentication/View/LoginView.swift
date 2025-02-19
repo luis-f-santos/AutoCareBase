@@ -13,6 +13,8 @@ struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
+    @State private var showingLoginAlert = false
+    @State private var alertMessage = ""
 //    @EnvironmentObject var viewModel: AuthViewModel;
     @FocusState private var focusField: Field?
     
@@ -59,7 +61,13 @@ struct LoginView: View {
                 
                 Button {
                     Task {
-                        try await AuthService.shared.logIn(withEmail: email, password: password)
+                        try await AuthService.shared.logIn(withEmail: email, password: password,
+                                                           completion: { (showAlert, errorText) -> Void in
+                            if (showAlert) {
+                                showingLoginAlert = true
+                                alertMessage = errorText
+                            }
+                        })
                     }
                 } label: {
                     HStack {
@@ -75,6 +83,11 @@ struct LoginView: View {
                 .opacity(formIsValid ? 1.0 : 0.5)
                 .cornerRadius(10)
                 .padding(.top, 24)
+                .alert("Error", isPresented: $showingLoginAlert) {
+                            Button("OK", role: .cancel) { }
+                        } message: {
+                            Text(alertMessage)
+                        }
                 
                 Spacer()
                 

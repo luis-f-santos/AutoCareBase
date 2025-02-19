@@ -19,6 +19,8 @@ struct RegistrationView: View {
     @State private var address = ""
     @State private var password = ""
     @State private var confirmPassword = ""
+    @State private var showingSignUpAlert = false
+    @State private var alertMessage = ""
     @FocusState private var focusField: Field?
 
     @Environment(\.dismiss) var dismiss
@@ -120,12 +122,16 @@ struct RegistrationView: View {
 
             Button {
                 print("Sign Up button clicked")
+                focusField = nil 
                 Task {
-                    try await AuthService.shared.createUser(withEmail: email,
-                                                   password: password,
-                                                   fullName: fullName,
-                                                   phoneNumber: phoneNumber,
-                                                   address: address)
+                    try await AuthService.shared.createUser(withEmail: email, password: password,
+                                                            fullName: fullName, phoneNumber: phoneNumber,
+                                                            address: address, completion: { (showAlert, errorText) -> Void in
+                        if (showAlert) {
+                            showingSignUpAlert = true
+                            alertMessage = errorText
+                        }
+                    })
                 }
             } label: {
                 HStack {
@@ -141,6 +147,11 @@ struct RegistrationView: View {
             .opacity(formIsValid ? 1.0 : 0.5)
             .cornerRadius(10)
             .padding(.top, 16)
+            .alert("Error", isPresented: $showingSignUpAlert) {
+                        Button("OK", role: .cancel) { }
+                    } message: {
+                        Text(alertMessage)
+                    }
             
             Spacer()
             
