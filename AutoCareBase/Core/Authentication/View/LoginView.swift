@@ -23,8 +23,8 @@ struct LoginView: View {
                 //Logo
                 Image("AustinWeirdAutosLogo")
                     .resizable()
-                    .scaledToFit()
-//                    .frame(width: 300, height: 200)
+                    .scaledToFill()
+                    .frame(width: 300, height: 200)
                     .padding(.vertical, 20)
                 
                 // Sign In Form
