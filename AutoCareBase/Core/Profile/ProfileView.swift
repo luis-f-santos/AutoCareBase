@@ -52,17 +52,6 @@ struct ProfileView: View {
                         .foregroundColor(.black)
                     }
                 }
-                .sheet(item: $selectedPost, onDismiss: {
-                    if(userUpdatedPost){
-                        Task {
-                            try await viewModel.reloadPosts()
-                            userUpdatedPost.toggle()
-                        }
-                    }
-                }, content: { post in
-                    PostDetailView(post: post, didUpdatePublic: $userUpdatedPost)
-                        .presentationDetents([.fraction(0.85)])
-                })
                 Section("Account"){
                     Button {
                         print("Sign Out Button clicked")
@@ -70,10 +59,20 @@ struct ProfileView: View {
                     } label: {
                         ProfileRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: .red)
                     }
-                    
                 }
             }
-            .navigationTitle("Home")
+            .sheet(item: $selectedPost, onDismiss: {
+                if(userUpdatedPost){
+                    Task {
+                        try await viewModel.reloadPosts()
+                        userUpdatedPost.toggle()
+                    }
+                }
+            }, content: { post in
+                PostDetailView(post: post, didUpdatePublic: $userUpdatedPost)
+                    .presentationDetents([.fraction(0.85)])
+            })
+            .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
