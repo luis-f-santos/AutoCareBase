@@ -12,7 +12,15 @@ import Kingfisher
 struct PostDetailView: View {
     var post: Post
     @Binding var didUpdatePublic: Bool
-    @StateObject var viewModel = PostDetailPostViewModel()    
+    @State var screenWidth: CGFloat = UIScreen.main.bounds.width
+    @State var imageFrameHeight: CGFloat = 300
+    @State var scale = 1.0
+    @State var lastScale = 0.0
+    @State var offset: CGSize = .zero
+    @State var lastOffset: CGSize = .zero
+    @State var enableDragGesture: Bool = false
+
+    @StateObject var viewModel = PostDetailPostViewModel()
     
     var body: some View {
         VStack {
@@ -26,9 +34,14 @@ struct PostDetailView: View {
                         KFImage(URL(string: post.imageURLsArray![i]))
                             .placeholder{ProgressView().tint(.white)}
                             .resizable()
+                            .gesture(drag, isEnabled: enableDragGesture)
+                            .gesture(doubleTap)
+                            .offset(offset)
                             .scaledToFill()
-                            .frame(width: UIScreen.main.bounds.width, height: 300)
+                            .frame(width: screenWidth, height: imageFrameHeight)
+                            .scaleEffect(scale)
                             .clipped()
+                            .gesture(zoom)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
@@ -65,6 +78,57 @@ struct PostDetailView: View {
             }
             Spacer()
         }
+    }
+    
+    var drag: some Gesture {
+        DragGesture(minimumDistance: 1)
+            .onChanged{ value in
+                withAnimation(.spring()) {
+                    offset = handleOffsetChange(value.translation)
+                }
+            }
+            .onEnded{ value in
+                lastOffset = offset
+            }
+    }
+    
+    var doubleTap: some Gesture {
+        TapGesture(count: 2)
+            .onEnded{
+                withAnimation(.spring()) {
+                    scale = 1.0
+                    lastScale = 0.0
+                    offset = .zero
+                    lastOffset = .zero
+                    enableDragGesture = false
+                }
+            }
+    }
+    
+    var zoom: some Gesture {
+        MagnificationGesture(minimumScaleDelta: 0)
+            .onChanged{ value in
+                scale = handleScaleChange(value)
+            }
+            .onEnded{ value in
+                if(scale > 1.0 || scale < 1.0){
+                    enableDragGesture = true
+                }
+                lastScale = scale
+            }
+    }
+    
+    private func handleScaleChange(_ zoom: CGFloat) -> CGFloat {
+        lastScale + zoom - (lastScale == 0 ? 0 : 1)
+    }
+
+    private func handleOffsetChange(_ offset: CGSize) -> CGSize {
+        var newOffset: CGSize = .zero
+        let multScale = 1.15
+        newOffset.width = multScale * offset.width + lastOffset.width
+        newOffset.height = multScale * offset.height + lastOffset.height
+
+        return newOffset
     }
 }
 
