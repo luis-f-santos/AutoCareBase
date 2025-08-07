@@ -15,10 +15,12 @@ struct PostDetailView: View {
     @State var screenWidth: CGFloat = UIScreen.main.bounds.width
     @State var imageFrameHeight: CGFloat = 300
     @State var scale = 1.0
-    @State var lastScale = 0.0
+    @State var lastScale = 1.0
     @State var offset: CGSize = .zero
     @State var lastOffset: CGSize = .zero
     @State var enableDragGesture: Bool = false
+    var minScale = 1.0
+    var maxScale = 5.0
 
     @StateObject var viewModel = PostDetailPostViewModel()
     
@@ -41,7 +43,7 @@ struct PostDetailView: View {
                             .frame(width: screenWidth, height: imageFrameHeight)
                             .scaleEffect(scale)
                             .clipped()
-                            .gesture(zoom)
+                            .gesture(magnification)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle())
@@ -97,7 +99,7 @@ struct PostDetailView: View {
             .onEnded{
                 withAnimation(.spring()) {
                     scale = 1.0
-                    lastScale = 0.0
+                    lastScale = 1.0
                     offset = .zero
                     lastOffset = .zero
                     enableDragGesture = false
@@ -105,17 +107,40 @@ struct PostDetailView: View {
             }
     }
     
-    var zoom: some Gesture {
-        MagnificationGesture(minimumScaleDelta: 0)
-            .onChanged{ value in
-                scale = handleScaleChange(value)
+    var magnification: some Gesture {
+        MagnificationGesture()
+            .onChanged { state in
+                adjustScale(from: state)
             }
-            .onEnded{ value in
+            .onEnded { state in
+                withAnimation {
+                    validateScaleLimits()
+                }
                 if(scale > 1.0 || scale < 1.0){
                     enableDragGesture = true
+                } else if (minScale == scale){
+                    offset = .zero
+                    lastOffset = .zero
+                    enableDragGesture = false
                 }
-                lastScale = scale
+                lastScale = 1.0
             }
+    }
+    
+    func adjustScale(from state: MagnificationGesture.Value) {
+        let delta = state / lastScale
+        scale *= delta
+        lastScale = state
+    }
+    func getMiniumScaledAllowed() -> CGFloat {
+        return max(scale, minScale)
+    }
+    func gerMaximumAllowed() -> CGFloat {
+        return min(scale, maxScale)
+    }
+    func validateScaleLimits(){
+        scale = getMiniumScaledAllowed()
+        scale = gerMaximumAllowed()
     }
     
     private func handleScaleChange(_ zoom: CGFloat) -> CGFloat {
@@ -124,7 +149,7 @@ struct PostDetailView: View {
 
     private func handleOffsetChange(_ offset: CGSize) -> CGSize {
         var newOffset: CGSize = .zero
-        let multScale = 1.15
+        let multScale = 1.25
         newOffset.width = multScale * offset.width + lastOffset.width
         newOffset.height = multScale * offset.height + lastOffset.height
 
