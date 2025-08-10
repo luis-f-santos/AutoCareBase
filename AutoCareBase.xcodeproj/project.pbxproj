@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164563142E453B1400AC4F69 /* OwnerMessengerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164563132E453B1400AC4F69 /* OwnerMessengerView.swift */; };
 		16DC7E4C2D66F23400CB5537 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16DC7E4B2D66F23400CB5537 /* Splash.storyboard */; };
 		BF02583A2C19F29B0035E9FF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF0258392C19F29B0035E9FF /* FirebaseAuth */; };
 		BF02583C2C19F29B0035E9FF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BF02583B2C19F29B0035E9FF /* FirebaseFirestore */; };
@@ -74,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		164563132E453B1400AC4F69 /* OwnerMessengerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerMessengerView.swift; sourceTree = "<group>"; };
 		16DC7E4B2D66F23400CB5537 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		BF0258442C1A2B650035E9FF /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BF0258482C1BA2D40035E9FF /* ProfileRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRowView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		164563302E455BF200AC4F69 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				164563132E453B1400AC4F69 /* OwnerMessengerView.swift */,
+			);
+			path = Messaging;
+			sourceTree = "<group>";
+		};
 		BF0258412C19F3260035E9FF /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +321,7 @@
 				BF80C8F72C251056007BA234 /* CreateNewPost */,
 				BFC445402C202E0800AD41A3 /* Feed */,
 				BF90985E2C3C86EC00D612F1 /* Location */,
+				164563302E455BF200AC4F69 /* Messaging */,
 				BF2541142C2DD0C8008BA3F0 /* PostDetail */,
 				BFB346812C17A30C0009C149 /* Profile */,
 				BF5EA7D92C230D5400C715D4 /* UserPosts */,
@@ -547,6 +558,7 @@
 				BFB9FF6A2C17C6F20030B68F /* InputView.swift in Sources */,
 				BFC4453D2C20241300AD41A3 /* UsersListView.swift in Sources */,
 				BF7BF28C2C287ED800D91DD5 /* myPost.swift in Sources */,
+				164563142E453B1400AC4F69 /* OwnerMessengerView.swift in Sources */,
 				BFA16FBF2C198FD50068547F /* User.swift in Sources */,
 				BF5EA7D62C21C1AE00C715D4 /* UsersListViewModel.swift in Sources */,
 				BF0258492C1BA2D40035E9FF /* ProfileRowView.swift in Sources */,
