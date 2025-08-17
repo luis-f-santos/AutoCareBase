@@ -10,6 +10,7 @@ import SwiftUI
 struct ChatLogView: View {
     
     @ObservedObject var viewModel: ChatLogViewModel
+    @State var errorSendingMessage = false
     
     init(currentUser: User, selectedUserId: String?){
         self._viewModel = ObservedObject(
@@ -52,7 +53,11 @@ struct ChatLogView: View {
                 .frame(height: 40)
                 
                 Button {
-                    viewModel.handleSend()
+                    Task {
+                        //TODO: before action need to diable sendButton
+                        errorSendingMessage = await viewModel.didSucccefullySendChat()
+                        //TODO: After action enable button
+                    }
                 } label: {
                     Text("Send")
                         .foregroundStyle(.white)

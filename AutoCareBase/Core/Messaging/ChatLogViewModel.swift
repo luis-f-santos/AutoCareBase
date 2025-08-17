@@ -27,9 +27,16 @@ class ChatLogViewModel: ObservableObject {
         }
     }
     
-    func handleSend() {
+    func didSucccefullySendChat() async -> Bool {
         
-        currentChatText = ""
+        guard let toId = chattingToUserId else { return false }
+        
+        if(await MessageService.sendMessage(fromId: currentUser.id, toId: toId, message: currentChatText)){
+            currentChatText = ""
+            return true
+        } else {
+            return false
+        }
     }
     
     @MainActor
