@@ -74,6 +74,22 @@ struct ProfileView: View {
             })
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement:.navigationBarTrailing ){
+                    //TODO: Guard editable and Selected and reset on return
+                    NavigationLink{
+//                        var uid = AuthService.shared.currentUser?.id
+//                        CreatePostView(userId: user.id, addedPostSuccess: $addedPostSuccess)
+//                            .onDisappear(){
+//                                if(addedPostSuccess){
+//                                    Task{ try await viewModel.reloadPosts() }
+//                                }
+//                            }
+                    } label: {
+                        Image(systemName: "plus").foregroundColor(.black)
+                    }
+                }
+            }
         }
     }
 }

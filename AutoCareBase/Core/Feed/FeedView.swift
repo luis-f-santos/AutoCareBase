@@ -25,6 +25,17 @@ struct FeedView: View {
             }
             .navigationTitle("Feed")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement:.navigationBarTrailing ){
+                    if let currentUser = AuthService.shared.currentUser {
+                        NavigationLink{
+                            OwnerMessengerView(user: currentUser)
+                        } label: {
+                            Image(systemName: "message").foregroundColor(.black)
+                        }
+                    }
+                }
+            }
         }
     }
         
