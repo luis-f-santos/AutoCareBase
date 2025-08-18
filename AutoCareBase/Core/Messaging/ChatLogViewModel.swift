@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 @MainActor
 class ChatLogViewModel: ObservableObject {
-    @Published var messages = [String]()
+    @Published var messages = [Message]()
     @Published var currentChatText = ""
     @Published var chattingToUser: User?
-
-//    @Published var didComebackFromUpdating = false
+    @Published var shouldScrollToBottom = false
+    @Published var initialStartToBottom = false
     
     let currentUser: User
     let chattingToUserId: String?
@@ -21,10 +22,43 @@ class ChatLogViewModel: ObservableObject {
     init(currentUser: User, chatterId: String?) {
         self.currentUser = currentUser
         self.chattingToUserId = chatterId
-        guard chatterId != nil else { return }
+        guard let chattingToId = self.chattingToUserId else { return }
+        Task {
+            await fetchMessages(withUserUid: currentUser.id, chatterUid: chattingToId)
+            initialStartToBottom.toggle()
+        }
         Task {
             try await fetchChattingToUser()
         }
+        
+    }
+    
+    private func fetchMessages(withUserUid fromId: String, chatterUid toId: String) async {
+
+        Firestore.firestore()
+            .collection("messages")
+            .document(fromId)
+            .collection(toId)
+            .order(by: "timestamp")
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    print(error)
+                    print("Failed to fetch Messages")
+                    return
+                }
+                querySnapshot?.documentChanges.forEach({ change in
+                    if change.type == .added {
+                        let data = change.document.data()
+                        self.messages.append(
+                            .init(documentId:change.document.documentID, data: data ))
+                    }
+                })
+                
+                DispatchQueue.main.async {
+                    self.shouldScrollToBottom.toggle()
+                }
+            }
+                
     }
     
     func didSucccefullySendChat() async -> Bool {
@@ -33,6 +67,7 @@ class ChatLogViewModel: ObservableObject {
         
         if(await MessageService.sendMessage(fromId: currentUser.id, toId: toId, message: currentChatText)){
             currentChatText = ""
+            shouldScrollToBottom.toggle()
             return true
         } else {
             return false

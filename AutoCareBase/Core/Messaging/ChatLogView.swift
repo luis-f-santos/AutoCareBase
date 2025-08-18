@@ -20,27 +20,51 @@ struct ChatLogView: View {
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(0..<20) { num in
+                ScrollViewReader { scrollViewProxy in
+                    ForEach(viewModel.messages) { (messageobj) in
+                        if(viewModel.currentUser.id == messageobj.fromId ){
+                            HStack {
+                                Spacer()
+                                HStack {
+                                    Text(messageobj.message)
+                                        .foregroundStyle(.white)
+                                }
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(8)
+                            }
+                        } else {
+                            HStack {
+                                HStack {
+                                    Text(messageobj.message)
+                                        .foregroundStyle(.black)
+                                }
+                                .padding()
+                                .background(Color(.systemGray5))
+                                .cornerRadius(8)
+                                Spacer()
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 8)
+                    
                     HStack {
                         Spacer()
-                        HStack {
-                            Text(" Fake longer half Message")
-                                .foregroundStyle(.white)
-                        }
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(8)
                     }
-                }
-                .padding(.horizontal)
-                .padding(.top, 8)
-                
-                HStack {
-                    Spacer()
+                    .id("Empty")
+                    .onReceive(viewModel.$shouldScrollToBottom) { _ in
+                        withAnimation(.easeOut(duration: 0.5)) {
+                            scrollViewProxy.scrollTo("Empty", anchor: .bottom)
+                        }
+                    }
+                    .onReceive(viewModel.$initialStartToBottom) { _ in
+                        scrollViewProxy.scrollTo("Empty", anchor: .bottom)
+                    }
                 }
             }
             .background(Color(.init(white: 0.95, alpha: 1)))
-//            .defaultScrollAnchor(.bottom)
+            .padding(.top, 1)
             
             HStack {
                 ZStack(alignment: .leading) {
@@ -69,7 +93,7 @@ struct ChatLogView: View {
             }
             .padding()
         }
-        .navigationTitle(viewModel.chattingToUser?.id ?? "")
+        .navigationTitle(viewModel.chattingToUser?.shortName ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
     }

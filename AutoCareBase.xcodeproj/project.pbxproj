@@ -14,6 +14,7 @@
 		164563582E4B160E00AC4F69 /* CreateNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164563572E4B160E00AC4F69 /* CreateNewMessageView.swift */; };
 		1645635A2E4B2D8F00AC4F69 /* CreateNewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164563592E4B2D8F00AC4F69 /* CreateNewMessageViewModel.swift */; };
 		164563602E51EC2400AC4F69 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1645635F2E51EC2400AC4F69 /* MessageService.swift */; };
+		164563622E5338B700AC4F69 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164563612E5338B700AC4F69 /* Message.swift */; };
 		16DC7E4C2D66F23400CB5537 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16DC7E4B2D66F23400CB5537 /* Splash.storyboard */; };
 		BF02583A2C19F29B0035E9FF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF0258392C19F29B0035E9FF /* FirebaseAuth */; };
 		BF02583C2C19F29B0035E9FF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BF02583B2C19F29B0035E9FF /* FirebaseFirestore */; };
@@ -88,6 +89,7 @@
 		164563572E4B160E00AC4F69 /* CreateNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageView.swift; sourceTree = "<group>"; };
 		164563592E4B2D8F00AC4F69 /* CreateNewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageViewModel.swift; sourceTree = "<group>"; };
 		1645635F2E51EC2400AC4F69 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		164563612E5338B700AC4F69 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		16DC7E4B2D66F23400CB5537 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
 		BF0258442C1A2B650035E9FF /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BF0258482C1BA2D40035E9FF /* ProfileRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRowView.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 			children = (
 				BFA16FBE2C198FD50068547F /* User.swift */,
 				BF5EA7CE2C21896100C715D4 /* Post.swift */,
+				164563612E5338B700AC4F69 /* Message.swift */,
 				BF7BF28B2C287ED800D91DD5 /* myPost.swift */,
 			);
 			path = Model;
@@ -576,6 +579,7 @@
 				164563602E51EC2400AC4F69 /* MessageService.swift in Sources */,
 				BF5EA7D42C21C0F400C715D4 /* UserService.swift in Sources */,
 				BFB9FF6A2C17C6F20030B68F /* InputView.swift in Sources */,
+				164563622E5338B700AC4F69 /* Message.swift in Sources */,
 				BFC4453D2C20241300AD41A3 /* UsersListView.swift in Sources */,
 				BF7BF28C2C287ED800D91DD5 /* myPost.swift in Sources */,
 				164563562E4B15EE00AC4F69 /* ChatLogViewModel.swift in Sources */,
