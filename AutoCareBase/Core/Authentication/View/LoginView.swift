@@ -48,6 +48,9 @@ struct LoginView: View {
                               placeHolder: "Enter your password",
                               isSecureField: true)
                     .textInputAutocapitalization(.never)
+                    .textContentType(nil)
+                    .autocorrectionDisabled(true) // Disables autocorrection
+                    .autocapitalization(.none)
                     .submitLabel(.done)
                     .keyboardType(.asciiCapable)
                     .autocorrectionDisabled()

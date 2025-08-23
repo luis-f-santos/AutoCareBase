@@ -31,6 +31,7 @@ struct CreateNewMessageView: View {
                 ForEach(viewModel.myFilteredArray){ user in
                     Button {
                         selectedChatUserId = user.id
+                        var shortname = user.shortName
                         dismiss()
                     } label: {
                         HStack(spacing: 16) {

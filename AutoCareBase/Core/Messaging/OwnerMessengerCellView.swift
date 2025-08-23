@@ -10,17 +10,21 @@ import SwiftUI
 struct OwnerMessengerCellView: View {
     
     let name: String
+    let initials: String
+    let message: String
     
-    init(name: String) {
-        self.name = name
+    init(recentMessage: RecentMessage) {
+        self.name = recentMessage.userName
+        self.initials = recentMessage.userInitials
+        self.message = recentMessage.message
     }
-    public func getName() -> String {
-        return name
-    }
+//    public func getName() -> String {
+//        return name
+//    }
     var body: some View {
         VStack(spacing: 0){
             HStack {
-                Text("LS")
+                Text(initials)
                     .font(.title)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -32,7 +36,7 @@ struct OwnerMessengerCellView: View {
                     Text(name)
                         .font(.system(size: 18))
                         .fontWeight(.semibold)
-                    Text("Last two line text that should be mig be bigger but it should ellipseize if it get too big")
+                    Text(message)
                         .font(.footnote)
                         .foregroundColor(.gray)
                         .lineLimit(2)
@@ -52,5 +56,5 @@ struct OwnerMessengerCellView: View {
 }
 
 #Preview {
-    OwnerMessengerCellView(name:"Luis Santos")
+//    OwnerMessengerCellView(name:"Luis Santos")
 }

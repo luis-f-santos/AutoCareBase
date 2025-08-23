@@ -10,17 +10,14 @@ import SwiftUI
 struct OwnerMessengerView: View {
     
     let user: User
-    
+    @StateObject var viewModel: OwnerMessengerViewModel
+
     init(user: User){
         self.user = user
+        self._viewModel = StateObject(wrappedValue: OwnerMessengerViewModel(uid: user.id))
     }
-    var viewsArray: [OwnerMessengerCellView] = [
-        OwnerMessengerCellView(name: "View 1"),
-        OwnerMessengerCellView(name: "View 2")
-        ]
-    
-    var namesArray: [String] = ["Name1", "Name2"]
-    
+
+    @State var selectedRecentMessage : RecentMessage? = nil
     @State var selectedChatUserId : String? = nil
     @State var shouldShowNewMessageScreen = false
     @State var shouldShowChatMessagesView = false
@@ -28,15 +25,16 @@ struct OwnerMessengerView: View {
     
     var body: some View {
         HStack {
-            Text(user.initials)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .foregroundColor(.white)
+            Image("AustinWeirdAutosLogo")
+                .resizable()
+                .scaledToFill()
                 .frame(width: 55, height: 55)
-                .background(Color(.systemGray3))
                 .clipShape(Circle())
+                .overlay {
+                    Circle().stroke(.white, lineWidth: 2)
+                }
             VStack(alignment: .leading, spacing: 4) {
-                Text(user.fullName)
+                Text("Austin Weird Autos")
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.top, 4)
@@ -56,25 +54,29 @@ struct OwnerMessengerView: View {
         
         ScrollView {
             LazyVStack(spacing: 12){
-                ForEach(namesArray, id: \.self) { viewName in
-                    NavigationLink(value: viewName) {
+                ForEach(viewModel.recentMessages) { rm in
+                    NavigationLink(value: rm.chattingToId) {
                         Button{
-//                            selectedChatUserId = viewName
-//                            shouldShowChatMessagesView.toggle()
+                            selectedChatUserId = rm.chattingToId
+                            selectedRecentMessage = rm
+                            shouldShowChatMessagesView.toggle()
                         } label: {
-                            OwnerMessengerCellView(name: viewName)
+                            OwnerMessengerCellView(recentMessage: rm)
                         }
                         .foregroundColor(.black)
+                        Divider()
                     }
-                    Divider()
                 }
             }
             .padding(.top, 8)
 //                .searchable(text: $searchText, prompt: "Search...")
         }
-        .navigationDestination(isPresented: $shouldShowChatMessagesView,
-                                    destination: {ChatLogView(currentUser: self.user,
-                                                              selectedUserId: selectedChatUserId)})
+        .navigationDestination(isPresented: $shouldShowChatMessagesView, destination: {
+//            if let selectedRecentMessage = self.selectedRecentMessage {
+                ChatLogView(currentUser: self.user,selectedUserId: selectedChatUserId)
+//            }
+            
+        })
         .navigationTitle("Messaging")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar{

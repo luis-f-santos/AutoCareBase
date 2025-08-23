@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ChatLogView: View {
     
-    @ObservedObject var viewModel: ChatLogViewModel
+    @StateObject var viewModel: ChatLogViewModel
     @State var errorSendingMessage = false
     
     init(currentUser: User, selectedUserId: String?){
-        self._viewModel = ObservedObject(
+        self._viewModel = StateObject(
             wrappedValue: ChatLogViewModel(currentUser: currentUser, chatterId: selectedUserId))
     }
         
@@ -29,9 +29,10 @@ struct ChatLogView: View {
                                     Text(messageobj.message)
                                         .foregroundStyle(.white)
                                 }
-                                .padding()
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 8)
                                 .background(Color.blue)
-                                .cornerRadius(8)
+                                .cornerRadius(12)
                             }
                         } else {
                             HStack {
@@ -39,15 +40,16 @@ struct ChatLogView: View {
                                     Text(messageobj.message)
                                         .foregroundStyle(.black)
                                 }
-                                .padding()
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 8)
                                 .background(Color(.systemGray5))
-                                .cornerRadius(8)
+                                .cornerRadius(12)
                                 Spacer()
                             }
                         }
                     }
                     .padding(.horizontal)
-                    .padding(.top, 8)
+                    .padding(.top, 5)
                     
                     HStack {
                         Spacer()
@@ -59,12 +61,14 @@ struct ChatLogView: View {
                         }
                     }
                     .onReceive(viewModel.$initialStartToBottom) { _ in
-                        scrollViewProxy.scrollTo("Empty", anchor: .bottom)
+                        withAnimation(.easeInOut(duration: 0.1).speed(5.0)) {
+                            scrollViewProxy.scrollTo("Empty", anchor: .bottom)
+                        }
                     }
                 }
             }
             .background(Color(.init(white: 0.95, alpha: 1)))
-            .padding(.top, 1)
+//            .padding(.top, drawPadding ? 1 : 0) .easeInOut(duration: 1.0).speed(2.0)
             
             HStack {
                 ZStack(alignment: .leading) {
@@ -79,7 +83,7 @@ struct ChatLogView: View {
                 Button {
                     Task {
                         //TODO: before action need to diable sendButton
-                        errorSendingMessage = await viewModel.didSucccefullySendChat()
+                        await viewModel.didSucccefullySendChat()
                         //TODO: After action enable button
                     }
                 } label: {
@@ -95,8 +99,6 @@ struct ChatLogView: View {
         }
         .navigationTitle(viewModel.chattingToUser?.shortName ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarRole(.editor)
+        .toolbarRole(.editor) //Removes back button text
     }
-  
 }
-
