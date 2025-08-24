@@ -26,7 +26,7 @@ class CreateNewMessageViewModel: ObservableObject {
     @MainActor
     func fetchMessageUserList() async throws {
         if let currentUser = AuthService.shared.currentUser{
-            self.users = try await UserService.fetchMessageUserList(withoutUid: currentUser.id)
+            self.users = try await UserService.fetchUserList(withoutUid: currentUser.id)
         }
         
     }

@@ -20,7 +20,7 @@ struct UserService {
         
     }
     
-    static func fetchMessageUserList(withoutUid uid: String) async throws -> [User] {
+    static func fetchUserList(withoutUid uid: String) async throws -> [User] {
         let snapshot = try await Firestore.firestore().collection("users").whereField("id", isNotEqualTo: uid).getDocuments()
         return snapshot.documents.compactMap({ try? $0.data(as: User.self) })
     }

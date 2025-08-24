@@ -18,6 +18,7 @@
 		16AFF3322E56A17600FB40E7 /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFF3312E56A17600FB40E7 /* RecentMessage.swift */; };
 		16AFF3342E56A49A00FB40E7 /* OwnerMessengerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AFF3332E56A49A00FB40E7 /* OwnerMessengerViewModel.swift */; };
 		16DC7E4C2D66F23400CB5537 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16DC7E4B2D66F23400CB5537 /* Splash.storyboard */; };
+		16F0835C2E5A79D0007D011E /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F0835B2E5A79D0007D011E /* Settings.swift */; };
 		BF02583A2C19F29B0035E9FF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BF0258392C19F29B0035E9FF /* FirebaseAuth */; };
 		BF02583C2C19F29B0035E9FF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BF02583B2C19F29B0035E9FF /* FirebaseFirestore */; };
 		BF02583E2C19F29B0035E9FF /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BF02583D2C19F29B0035E9FF /* FirebaseFirestoreSwift */; };
@@ -95,6 +96,7 @@
 		16AFF3312E56A17600FB40E7 /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		16AFF3332E56A49A00FB40E7 /* OwnerMessengerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerMessengerViewModel.swift; sourceTree = "<group>"; };
 		16DC7E4B2D66F23400CB5537 /* Splash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		16F0835B2E5A79D0007D011E /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		BF0258442C1A2B650035E9FF /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BF0258482C1BA2D40035E9FF /* ProfileRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRowView.swift; sourceTree = "<group>"; };
 		BF02584A2C1BA5250035E9FF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				164563612E5338B700AC4F69 /* Message.swift */,
 				16AFF3312E56A17600FB40E7 /* RecentMessage.swift */,
 				BF7BF28B2C287ED800D91DD5 /* myPost.swift */,
+				16F0835B2E5A79D0007D011E /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				BF02584B2C1BA5250035E9FF /* ProfileView.swift in Sources */,
 				BF0655A62C3394C300097820 /* PostDetailViewModel.swift in Sources */,
 				164563602E51EC2400AC4F69 /* MessageService.swift in Sources */,
+				16F0835C2E5A79D0007D011E /* Settings.swift in Sources */,
 				16AFF3322E56A17600FB40E7 /* RecentMessage.swift in Sources */,
 				BF5EA7D42C21C0F400C715D4 /* UserService.swift in Sources */,
 				BFB9FF6A2C17C6F20030B68F /* InputView.swift in Sources */,

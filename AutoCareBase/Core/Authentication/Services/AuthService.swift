@@ -13,6 +13,8 @@ class AuthService {
     
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
+    @Published var appSettings: Settings?
+
     
     static let shared = AuthService()
     
@@ -68,7 +70,20 @@ class AuthService {
         self.userSession = Auth.auth().currentUser
         guard let uid = self.userSession?.uid else { return }
         self.currentUser =  try await UserService.fetchUser(withUid: uid)
+        self.appSettings = try await loadAppSettings()
         print("DEBUG: CURRENT USER IS \(String(describing: self.currentUser))")
+        print("DEBUG: APP SETTINGS IS \(String(describing: self.appSettings))")
+    }
+    
+    func loadAppSettings() async throws -> Settings? {
+        let snapshot = try await Firestore.firestore().collection("settings")
+                                            .whereField("release", isEqualTo: "production")
+                                                .getDocuments()
+        if let docments = snapshot.documents.first {
+            print("Settings pulled in: \(String(describing: docments))")
+            return try docments.data(as: Settings.self)
+        }
+        else { return nil }
     }
     
     func getFirebaseErrorMessage(error: NSError) -> String {
@@ -94,11 +109,17 @@ class AuthService {
         }
     }
     
+    func ownerIsLoggedIn() -> Bool {
+        let currentid = self.userSession?.uid, ownerid = self.appSettings?.owner_uid
+        return currentid == ownerid
+    }
+    
     func signOut() {
         do {
             try Auth.auth().signOut()
             self.userSession = nil
             self.currentUser = nil
+            self.appSettings = nil
         } catch {
             print("DEBUG: Failed to SignOut with error: \(error.localizedDescription)")
         }

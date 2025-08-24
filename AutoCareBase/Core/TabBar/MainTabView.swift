@@ -12,7 +12,7 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            if(user.id == "13D52CTSlBSf6052Ya4JBiVyPoS2"){
+            if(AuthService.shared.ownerIsLoggedIn()){
                 UsersListView()
                     .tabItem {
                         Image(systemName: "person")
