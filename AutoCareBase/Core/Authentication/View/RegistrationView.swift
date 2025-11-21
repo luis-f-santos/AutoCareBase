@@ -124,7 +124,7 @@ struct RegistrationView: View {
                 print("Sign Up button clicked")
                 focusField = nil 
                 Task {
-                    try await AuthService.shared.createUser(withEmail: email, password: password,
+                    try await AppServices.shared.createUser(withEmail: email, password: password,
                                                             fullName: fullName, phoneNumber: phoneNumber,
                                                             address: address, completion: { (showAlert, errorText) -> Void in
                         if (showAlert) {

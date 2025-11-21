@@ -11,7 +11,7 @@ import Combine
 
 class ContentViewModel: ObservableObject {
     
-    private let service = AuthService.shared
+    private let service = AppServices.shared
     private var cancellables = Set<AnyCancellable>()
     
     @Published var userSession: FirebaseAuth.User?

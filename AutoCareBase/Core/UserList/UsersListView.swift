@@ -50,7 +50,7 @@ struct UsersListView: View {
                     HStack() {
                         Button {
                             print("Sign Out Button clicked")
-                            AuthService.shared.signOut()
+                            AppServices.shared.signOut()
                         } label: {
                             ProfileRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: .red)
                                 

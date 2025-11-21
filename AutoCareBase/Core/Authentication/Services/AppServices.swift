@@ -9,14 +9,14 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-class AuthService {
+class AppServices {
     
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var appSettings: Settings?
 
     
-    static let shared = AuthService()
+    static let shared = AppServices()
     
     init() {
         
@@ -109,7 +109,7 @@ class AuthService {
         }
     }
     
-    func ownerIsLoggedIn() -> Bool {
+    func isOwnerLoggedIn() -> Bool {
         let currentid = self.userSession?.uid, ownerid = self.appSettings?.owner_uid
         return currentid == ownerid
     }

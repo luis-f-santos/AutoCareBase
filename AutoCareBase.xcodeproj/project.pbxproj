@@ -50,7 +50,7 @@
 		BFA16FBD2C196FAB0068547F /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA16FBC2C196FAB0068547F /* RegistrationView.swift */; };
 		BFA16FBF2C198FD50068547F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA16FBE2C198FD50068547F /* User.swift */; };
 		BFA16FC12C19B7840068547F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFA16FC02C19B7830068547F /* GoogleService-Info.plist */; };
-		BFB12B672C1EE4D9004EC0C6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB12B662C1EE4D9004EC0C6 /* AuthService.swift */; };
+		BFB12B672C1EE4D9004EC0C6 /* AppServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB12B662C1EE4D9004EC0C6 /* AppServices.swift */; };
 		BFB12B692C1EF309004EC0C6 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB12B682C1EF309004EC0C6 /* ContentViewModel.swift */; };
 		BFB346512C179FA40009C149 /* AutoCareBaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB346502C179FA40009C149 /* AutoCareBaseApp.swift */; };
 		BFB346532C179FA40009C149 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB346522C179FA40009C149 /* ContentView.swift */; };
@@ -123,7 +123,7 @@
 		BFA16FBC2C196FAB0068547F /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		BFA16FBE2C198FD50068547F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BFA16FC02C19B7830068547F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		BFB12B662C1EE4D9004EC0C6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		BFB12B662C1EE4D9004EC0C6 /* AppServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppServices.swift; sourceTree = "<group>"; };
 		BFB12B682C1EF309004EC0C6 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		BFB3464D2C179FA40009C149 /* AutoCareBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AutoCareBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB346502C179FA40009C149 /* AutoCareBaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCareBaseApp.swift; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 		BFB12B652C1EE4C3004EC0C6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				BFB12B662C1EE4D9004EC0C6 /* AuthService.swift */,
+				BFB12B662C1EE4D9004EC0C6 /* AppServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -599,7 +599,7 @@
 				BF5EA7D62C21C1AE00C715D4 /* UsersListViewModel.swift in Sources */,
 				BF0258492C1BA2D40035E9FF /* ProfileRowView.swift in Sources */,
 				BF9098602C3C871A00D612F1 /* LocationDetail.swift in Sources */,
-				BFB12B672C1EE4D9004EC0C6 /* AuthService.swift in Sources */,
+				BFB12B672C1EE4D9004EC0C6 /* AppServices.swift in Sources */,
 				16AFF3342E56A49A00FB40E7 /* OwnerMessengerViewModel.swift in Sources */,
 				BF0258452C1A2B650035E9FF /* AuthViewModel.swift in Sources */,
 				164563582E4B160E00AC4F69 /* CreateNewMessageView.swift in Sources */,

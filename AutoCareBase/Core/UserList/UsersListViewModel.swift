@@ -16,7 +16,7 @@ class UsersListViewModel: ObservableObject {
     
     @MainActor
     func fetchAllUsers() async throws {
-        if let currentUser = AuthService.shared.currentUser{
+        if let currentUser = AppServices.shared.currentUser{
             self.users = try await UserService.fetchUserList(withoutUid: currentUser.id)
         }
     }

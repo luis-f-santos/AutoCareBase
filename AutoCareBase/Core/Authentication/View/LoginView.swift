@@ -64,7 +64,7 @@ struct LoginView: View {
                 
                 Button {
                     Task {
-                        try await AuthService.shared.logIn(withEmail: email, password: password,
+                        try await AppServices.shared.logIn(withEmail: email, password: password,
                                                            completion: { (showAlert, errorText) -> Void in
                             if (showAlert) {
                                 showingLoginAlert = true

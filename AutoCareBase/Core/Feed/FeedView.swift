@@ -27,13 +27,13 @@ struct FeedView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement:.navigationBarTrailing ){
-                    if let currentUser = AuthService.shared.currentUser {
+                    if let currentUser = AppServices.shared.currentUser {
                         NavigationLink{
-                            if(AuthService.shared.ownerIsLoggedIn()) {
+                            if(AppServices.shared.isOwnerLoggedIn()) {
                                 OwnerMessengerView(user: currentUser)
                             } else {
                                 ChatLogView(currentUser: currentUser, selectedUserId:
-                                                AuthService.shared.appSettings?.owner_uid)
+                                                AppServices.shared.appSettings?.owner_uid)
                             }
                         } label: {
                             Image(systemName: "message").foregroundColor(.black)
