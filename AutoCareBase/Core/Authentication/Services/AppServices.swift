@@ -69,8 +69,10 @@ class AppServices {
     func loadUserData() async throws {
         self.userSession = Auth.auth().currentUser
         guard let uid = self.userSession?.uid else { return }
-        self.currentUser =  try await UserService.fetchUser(withUid: uid)
-        self.appSettings = try await loadAppSettings()
+        async let currentUser =  UserService.fetchUser(withUid: uid)
+        async let settings = loadAppSettings()
+        self.currentUser =  try await currentUser
+        self.appSettings = try await settings
         print("DEBUG: CURRENT USER IS \(String(describing: self.currentUser))")
         print("DEBUG: APP SETTINGS IS \(String(describing: self.appSettings))")
     }
