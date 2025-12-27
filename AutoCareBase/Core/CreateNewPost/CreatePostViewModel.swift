@@ -15,8 +15,9 @@ class CreatePostViewModel: ObservableObject {
     
     @Published var postImage: Image?
     @Published var selectedMaker = AUTO_MAKERS_ARRAY[0] //Default selected
-    @Published var year = ""
-    @Published var model = ""
+    @Published var selectedYear = ""
+    @Published var selectedModel: String? = nil
+    @Published var models: [String] = []
     private var uiImage: UIImage?
     
     @Published var pickerItem: PhotosPickerItem? {
@@ -55,9 +56,9 @@ class CreatePostViewModel: ObservableObject {
         let postData: [String: Any] = [
             "id": postRef.documentID,
             "userId": userId,
-            "year": year,
+            "year": selectedYear,
             "make": selectedMaker,
-            "model": model,
+            "model": selectedModel,
             "description": "Need to add description",
             "likes": 0,
             "dateCreated": postCreatedDate,
